@@ -27,12 +27,3 @@ def vigenere_cipher_clear(cipher_text, key):
         x += ord('A')
         orig_text.append(chr(x))
     return ("".join(orig_text))
-
-if __name__ == "__main__":
-    string = "GEEKSFORGEEKS"
-    keyword = "AYUSH"
-    key = generateKey(string, keyword)
-    cipher_text = vigenere_cipher_cipher(string, key)
-    print("Ciphertext :", cipher_text)
-    print("Original/Decrypted Text :",
-          vigenere_cipher_clear(cipher_text, key))

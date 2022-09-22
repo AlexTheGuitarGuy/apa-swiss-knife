@@ -7,34 +7,19 @@ import sys
 
 import eel
 
+from src.encryption.encode_methods import *
+
 # Use latest version of Eel from parent directory
 sys.path.insert(1, '../../')
 
+@eel.expose  # Expose function to JavaScript
+def base64_encode_js(string):
+    eel.show_log(base64_encode(string))
 
 @eel.expose  # Expose function to JavaScript
-def say_hello_py(x):
-    """Print message from JavaScript on app initialization, then call a JS function."""
-    print('Hello from %s' % x)  # noqa T001
-    eel.say_hello_js('Python {from within say_hello_py()}!')
-
-
-@eel.expose
-def expand_user(folder):
-    """Return the full path to display in the UI."""
-    return '{}/*'.format(os.path.expanduser(folder))
-
-
-@eel.expose
-def pick_file(folder):
-    """Return a random file from the specified folder."""
-    folder = os.path.expanduser(folder)
-    if os.path.isdir(folder):
-        listFiles = [_f for _f in os.listdir(folder) if not os.path.isdir(os.path.join(folder, _f))]
-        if len(listFiles) == 0:
-            return 'No Files found in {}'.format(folder)
-        return random.choice(listFiles)
-    else:
-        return '{} is not a valid folder'.format(folder)
+def base64_decode_js(string):
+    eel.show_log(base64_decode(string))
+    
 
 
 def start_eel(develop):
@@ -50,10 +35,6 @@ def start_eel(develop):
         page = 'index.html'
 
     eel.init(directory, ['.tsx', '.ts', '.jsx', '.js', '.html'])
-
-    # These will be queued until the first connection is made, but won't be repeated on a page reload
-    say_hello_py('Python World!')
-    eel.say_hello_js('Python World!')   # Call a JavaScript function (must be after `eel.init()`)
 
     eel.show_log('https://github.com/samuelhwilliams/Eel/issues/363 (show_log)')
 

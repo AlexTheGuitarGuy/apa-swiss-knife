@@ -64,7 +64,6 @@ def base64_encode(s):
 
     return base64
 
-
 def base64_decode(s):
     """
     Base64 este o notație pentru codificarea datelor arbitrare de octet folosind un set restricționat de simboluri care
@@ -103,8 +102,10 @@ def base64_decode(s):
 
     return decoded
 
-
 def drawing_authors():
+    """
+     Deseneaza autori,denumirea.
+    """
     print("""
                                      .:^
             ^                      /   :
@@ -120,8 +121,11 @@ Authors=======> Seremet A. Chihai A. Chirita S
 ----------------------------------------------------------------------
  """, end="")
 
-
 def rot13(s):
+    """
+    "rotație de 13 poziții", câteodată scris ca și ROT-13) este o metodă simplă de codificare folosită în special pe
+    forum-urile online pentru a masca spoilere, glume, soluțiile unui puzzle, precum și materiale ofensatoare.
+    """
     chars = "abcdefghijklmnopqrstuvwxyz"
     trans = chars[13:] + chars[:13]
     rot_char = lambda c: trans[chars.find(c)] if chars.find(c) > -1 else c
@@ -140,6 +144,8 @@ def rot47(data):
     """
     O variație puțin mai complexă a unui cifru cezar, care include caractere ASCII de la 33 '!' la 126 '~'. Rotire
     implicită: 47.
+    :param data:
+    :return ''.join(decode)
     """
     decode = []
     for i in range(len(data)):
@@ -151,6 +157,13 @@ def rot47(data):
     return ''.join(decode)
 
 def morse_encrypt(message):
+    """
+    Codul Morse sau alfabetul Morse este o metodă de transmitere a informației folosind secvențe standardizate de semne
+     sau pulsații scurte și lungi - cunoscute în mod comun ca „puncte” și „linii” - pentru litere, cifre și caracterele
+     speciale specifice oricărui mesaj.
+    :param message:
+    :return cipher :
+    """
     cipher = ''
     for letter in message:
         if letter != ' ':
@@ -161,6 +174,13 @@ def morse_encrypt(message):
     return cipher
 
 def morse_decrypt(message):
+    """
+        Codul Morse sau alfabetul Morse este o metodă de transmitere a informației folosind secvențe standardizate de semne
+         sau pulsații scurte și lungi - cunoscute în mod comun ca „puncte” și „linii” - pentru litere, cifre și caracterele
+         speciale specifice oricărui mesaj.
+        :param message:
+        :return decipher:
+        """
     message += ' '
     decipher = ''
     citext = ''
