@@ -1,4 +1,3 @@
-import json
 
 """
 Prin librarie:-_-
@@ -118,6 +117,7 @@ def drawing_authors():
     |  Swiss knife              |
      \_________________________/
 Authors=======> Seremet A. Chihai A. Chirita S 
+----------------------------------------------------------------------
  """, end="")
 
 
@@ -179,10 +179,3 @@ def morse_decrypt(message):
     return decipher
 
 drawing_authors()
-f = open('somethink_json.json')
-data = json.load(f)
-mesage = str(data["clear_text"])
-mor=morse_encrypt(mesage)
-f.close()
-print(mor)
-print(morse_decrypt(mor))
