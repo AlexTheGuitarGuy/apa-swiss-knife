@@ -24,7 +24,7 @@ MORSE_CODE_DICT = {'A': '.-','a':'.-', 'B': '-...','b': '-...',
                        '?': '..--..', '/': '-..-.', '-': '-....-',
                        '(': '-.--.', ')': '-.--.-'}
 
-def base64_encode(s):
+def base_64_encrypt(s):
     """
     Base64 este o notație pentru codificarea datelor arbitrare de octet folosind un set restricționat de simboluri care
     pot fi utilizate în mod convenabil de oameni și prelucrate de computere.
@@ -64,7 +64,7 @@ def base64_encode(s):
 
     return base64
 
-def base64_decode(s):
+def base_64_decrypt(s):
     """
     Base64 este o notație pentru codificarea datelor arbitrare de octet folosind un set restricționat de simboluri care
     pot fi utilizate în mod convenabil de oameni și prelucrate de computere.
@@ -121,7 +121,7 @@ Authors=======> Seremet A. Chihai A. Chirita S
 ----------------------------------------------------------------------
  """, end="")
 
-def rot13(s):
+def rot_13(s):
     """
     "rotație de 13 poziții", câteodată scris ca și ROT-13) este o metodă simplă de codificare folosită în special pe
     forum-urile online pentru a masca spoilere, glume, soluțiile unui puzzle, precum și materiale ofensatoare.
@@ -140,7 +140,7 @@ def rot13_decode(s):
     return ''.join(rot_char(c) for c in s)
 """
 
-def rot47(data):
+def rot_47(data):
     """
     O variație puțin mai complexă a unui cifru cezar, care include caractere ASCII de la 33 '!' la 126 '~'. Rotire
     implicită: 47.

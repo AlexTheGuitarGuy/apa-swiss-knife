@@ -13,12 +13,28 @@ from src.encryption.encode_methods import *
 sys.path.insert(1, '../../')
 
 @eel.expose  # Expose function to JavaScript
-def base64_encode_js(string):
-    eel.show_log(base64_encode(string))
+def base64Encrypt(string):
+   return base_64_encrypt(string)
 
-@eel.expose  # Expose function to JavaScript
-def base64_decode_js(string):
-    eel.show_log(base64_decode(string))
+@eel.expose
+def base64Decrypt(string):
+   return base_64_decrypt(string)
+
+@eel.expose  
+def rot13(string):
+   return rot_13(string)
+
+@eel.expose
+def rot47(string):
+   return rot_47(string)
+
+@eel.expose  
+def morseEncrypt(string):
+   return morse_encrypt(string)
+
+@eel.expose
+def morseDecrypt(string):
+   return morse_decrypt(string)
     
 
 
@@ -58,3 +74,4 @@ if __name__ == '__main__':
 
     # Pass any second argument to enable debugging
     start_eel(develop=len(sys.argv) == 2)
+

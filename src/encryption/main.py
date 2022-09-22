@@ -11,11 +11,11 @@ if __name__ == '__main__':
     print("Json ->", json_object)
 
     if json_object["method"] == "rot13":
-        json_object["cipher_text"] = encode_methods.rot13(json_object["clear_text"])
+        json_object["cipher_text"] = encode_methods.rot_13(json_object["clear_text"])
     elif json_object["method"] == "rot47":
-        json_object["cipher_text"] = encode_methods.rot47(json_object["clear_text"])
+        json_object["cipher_text"] = encode_methods.rot_47(json_object["clear_text"])
     elif json_object["method"] == "base64_encode":
-        json_object["cipher_text"] = encode_methods.base64_encode(json_object["clear_text"])
+        json_object["cipher_text"] = encode_methods.base_64_encode(json_object["clear_text"])
     elif json_object["method"] == "vigenere":
         key = cipher_methods.generateKey(json_object["clear_text"], json_object["key"])
         json_object["cipher_text"] = cipher_methods.vigenere_cipher_cipher(json_object["clear_text"], key)
