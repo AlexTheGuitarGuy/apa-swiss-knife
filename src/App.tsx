@@ -1,5 +1,15 @@
-import React, { useState } from 'react'
+import React, { ReactNode } from 'react'
 import './App.css'
+import { useAppSelector, useAppDispatch } from './hooks/reduxHooks'
+import CallbackCard from './components/CallbackCard/CallbackCard'
+import { fieldsActions, setText, transformText } from './redux/fields-reducer/fields-reducer'
+import {
+  getDisplayText,
+  getCallbacksMap,
+  getCurrentCallbacks,
+} from './redux/fields-reducer/fields-selector'
+
+import { getKeyByValue } from './utils/object-helpers'
 
 // Point Eel web socket to the instance
 export const eel = window.eel
@@ -11,44 +21,57 @@ function showLog(msg: string) {
 window.eel.expose(showLog, 'show_log')
 
 export const App = () => {
-  const [inputValue, setInputValue] = useState('')
-  const [text, setText] = useState('')
+  const displayText = useAppSelector(getDisplayText)
+  const callbacksMap = useAppSelector(getCallbacksMap)
+  const currentCallbacks = useAppSelector(getCurrentCallbacks)
 
-  const { base64Encrypt, base64Decrypt, morseEncrypt, morseDecrypt, rot13, rot47 } = eel
+  const dispatch = useAppDispatch()
 
-  const encrypt = (event: any, callback: any) => {
-    callback(inputValue)().then((message: string) => setText(message))
+  const callbackButtons: ReactNode[] = []
+
+  for (const [key, value] of Object.entries(callbacksMap)) {
+    callbackButtons.push(
+      <CallbackCard
+        key={key}
+        text={key}
+        callback={() => {
+          dispatch(fieldsActions.pushToCallbacks(value))
+          dispatch(transformText())
+        }}
+      />,
+    )
   }
 
-  const decrypt = (event: any, callback: any) => {
-    callback(inputValue)().then((message: string) => setText(message))
-  }
+  const currentCallbackNodeList = currentCallbacks.map((callback: string, index: number) => {
+    return (
+      <li key={callback + index}>
+        {getKeyByValue(callbacksMap, callback)}
+        <button
+          onClick={() => {
+            dispatch(fieldsActions.filterFromCallbacks(index))
+            dispatch(transformText())
+          }}
+          className='ml-4'
+        >
+          x
+        </button>
+      </li>
+    )
+  })
 
   return (
     <div>
-      <input placeholder='introduce text' onChange={(e) => setInputValue(e.target.value)} />
-      <div>{text || 'results will be shown here'}</div>
-      <div className='bg-red-200'>
-        Base 64
-        <div className='space-x-4'>
-          <button onClick={(e) => encrypt(e, base64Encrypt)}>Encode</button>
-          <button onClick={(e) => decrypt(e, base64Decrypt)}>Decode</button>
-        </div>
-      </div>
-      <div className='bg-orange-200'>
-        Morse
-        <div className='space-x-4'>
-          <button onClick={(e) => encrypt(e, morseEncrypt)}>Encode</button>
-          <button onClick={(e) => decrypt(e, morseDecrypt)}>Decode</button>
-        </div>
-      </div>
-      <div className='bg-amber-200'>
-        Rotation
-        <div className='space-x-4'>
-          <button onClick={(e) => encrypt(e, rot13)}>13</button>
-          <button onClick={(e) => decrypt(e, rot47)}>47</button>
-        </div>
-      </div>
+      <input
+        placeholder='introduce text'
+        onChange={(event: any) => {
+          dispatch(setText(event.target.value))
+        }}
+      />
+      <input value={displayText || 'result will be shown here'} className='block' />
+
+      {callbackButtons}
+
+      <ul>{currentCallbackNodeList}</ul>
     </div>
   )
 }

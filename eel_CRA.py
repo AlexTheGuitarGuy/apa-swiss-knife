@@ -1,77 +1,84 @@
 """Main Python application file for the EEL-CRA demo."""
+import logging
 
-import os
-import platform
-import random
-import sys
+logging.basicConfig(filename='C:/Users/andut/Desktop/code/react_projects/CyberChef-ripoff/MyLog.log',level=logging.DEBUG)
 
-import eel
-
-from src.encryption.encode_methods import *
-
-# Use latest version of Eel from parent directory
-sys.path.insert(1, '../../')
-
-@eel.expose  # Expose function to JavaScript
-def base64Encrypt(string):
-   return base_64_encrypt(string)
-
-@eel.expose
-def base64Decrypt(string):
-   return base_64_decrypt(string)
-
-@eel.expose  
-def rot13(string):
-   return rot_13(string)
-
-@eel.expose
-def rot47(string):
-   return rot_47(string)
-
-@eel.expose  
-def morseEncrypt(string):
-   return morse_encrypt(string)
-
-@eel.expose
-def morseDecrypt(string):
-   return morse_decrypt(string)
-    
-
-
-def start_eel(develop):
-    """Start Eel with either production or development configuration."""
-
-    if develop:
-        directory = 'src'
-        app = None
-        page = {'port': 3000}
-    else:
-        directory = 'build'
-        app = 'chrome-app'
-        page = 'index.html'
-
-    eel.init(directory, ['.tsx', '.ts', '.jsx', '.js', '.html'])
-
-    eel.show_log('https://github.com/samuelhwilliams/Eel/issues/363 (show_log)')
-
-    eel_kwargs = dict(
-        host='localhost',
-        port=8080,
-        size=(1280, 800),
-    )
-    try:
-        eel.start(page, mode=app, **eel_kwargs)
-    except EnvironmentError:
-        # If Chrome isn't found, fallback to Microsoft Edge on Win10 or greater
-        if sys.platform in ['win32', 'win64'] and int(platform.release()) >= 10:
-            eel.start(page, mode='edge', **eel_kwargs)
-        else:
-            raise
-
-
-if __name__ == '__main__':
+try:
+    import os
+    import platform
+    import random
     import sys
 
-    # Pass any second argument to enable debugging
-    start_eel(develop=len(sys.argv) == 2)
+    import eel
 
+    from src.encryption.encode_methods import *
+
+    # Use latest version of Eel from parent directory
+    sys.path.insert(1, '../../')
+
+    @eel.expose  # Expose function to JavaScript
+    def base64Encrypt(string):
+       return base_64_encrypt(string)
+
+    @eel.expose
+    def base64Decrypt(string):
+       return base_64_decrypt(string)
+
+    @eel.expose  
+    def rot13(string):
+       return rot_13(string)
+
+    @eel.expose
+    def rot47(string):
+       return rot_47(string)
+
+    @eel.expose  
+    def morseEncrypt(string):
+       return morse_encrypt(string)
+
+    @eel.expose
+    def morseDecrypt(string):
+       return morse_decrypt(string)
+        
+
+
+    def start_eel(develop):
+        """Start Eel with either production or development configuration."""
+
+        if develop:
+            directory = 'src'
+            app = None
+            page = {'port': 3000}
+        else:
+            directory = 'build'
+            app = 'chrome-app'
+            page = 'index.html'
+
+        eel.init(directory, ['.tsx', '.ts', '.jsx', '.js', '.html'])
+
+        eel.show_log('https://github.com/samuelhwilliams/Eel/issues/363 (show_log)')
+
+        eel_kwargs = dict(
+            host='localhost',
+            port=8080,
+            size=(1280, 800),
+        )
+        try:
+            eel.start(page, mode=app, **eel_kwargs)
+        except EnvironmentError:
+            # If Chrome isn't found, fallback to Microsoft Edge on Win10 or greater
+            if sys.platform in ['win32', 'win64'] and int(platform.release()) >= 10:
+                eel.start(page, mode='edge', **eel_kwargs)
+            else:
+                raise
+
+
+    if __name__ == '__main__':
+        import sys
+
+        # Pass any second argument to enable debugging
+        
+        start_eel(develop=len(sys.argv) == 2)
+
+except Exception as e:
+    logging.info(e)
