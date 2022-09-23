@@ -3,8 +3,8 @@ import { InferAction, InferThunk } from '../store'
 const initialState = {
   inputText: '',
   displayText: '',
-  currentCallbacks: [] as string[],
-  callbacksMap: {
+  currentOperations: [] as string[],
+  operationsMap: {
     'Base 64 encrypt': 'base64Encrypt',
     'Base 64 decrypt': 'base64Decrypt',
     'Morse encrypt': 'morseEncrypt',
@@ -28,16 +28,16 @@ const fieldsReducer = (state = initialState, action: FieldsAction): FieldsReduce
         ...state,
         ...action.payload,
       }
-    case 'SWISS_KNIFE/FIELDS_REDUCER/PUSH_TO_CALLBACKS':
+    case 'SWISS_KNIFE/FIELDS_REDUCER/PUSH_TO_OPERATIONS':
       return {
         ...state,
-        currentCallbacks: [...state.currentCallbacks, action.callback],
+        currentOperations: [...state.currentOperations, action.operation],
       }
-    case 'SWISS_KNIFE/FIELDS_REDUCER/FILTER_FROM_CALLBACKS':
+    case 'SWISS_KNIFE/FIELDS_REDUCER/FILTER_FROM_OPERATIONS':
       return {
         ...state,
-        currentCallbacks: state.currentCallbacks.filter(
-          (callback: string, index: number) => index !== action.index,
+        currentOperations: state.currentOperations.filter(
+          (operation: string, index: number) => index !== action.index,
         ),
       }
     default:
@@ -56,28 +56,28 @@ export const fieldsActions = {
       type: 'SWISS_KNIFE/FIELDS_REDUCER/SET_DISPLAY_TEXT',
       payload: { displayText },
     } as const),
-  pushToCallbacks: (callback: string) =>
+  pushToOperations: (operation: string) =>
     ({
-      type: 'SWISS_KNIFE/FIELDS_REDUCER/PUSH_TO_CALLBACKS',
-      callback,
+      type: 'SWISS_KNIFE/FIELDS_REDUCER/PUSH_TO_OPERATIONS',
+      operation,
     } as const),
 
-  filterFromCallbacks: (index: number) =>
+  filterFromOperations: (index: number) =>
     ({
-      type: 'SWISS_KNIFE/FIELDS_REDUCER/FILTER_FROM_CALLBACKS',
+      type: 'SWISS_KNIFE/FIELDS_REDUCER/FILTER_FROM_OPERATIONS',
       index,
     } as const),
 }
 
 export const transformText = (): FieldsThunk => {
   return async (dispatch, getState) => {
-    const currentCallbacks = getState().fieldsReducer.currentCallbacks
+    const currentOperations = getState().fieldsReducer.currentOperations
     const text = getState().fieldsReducer.inputText
 
     let transformed = text
 
-    for (const callback of currentCallbacks) {
-      transformed = await window.eel[callback](transformed)()
+    for (const operation of currentOperations) {
+      transformed = await window.eel[operation](transformed)()
     }
     dispatch(fieldsActions.setDisplayText(transformed))
   }

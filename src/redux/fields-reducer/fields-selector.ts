@@ -8,10 +8,10 @@ export const getDisplayText = (state: RootState) => {
 	return state.fieldsReducer.displayText
 }
 
-export const getCallbacksMap = (state: RootState) => {
-	return state.fieldsReducer.callbacksMap
+export const getOperationsMap = (state: RootState) => {
+	return state.fieldsReducer.operationsMap
 }
 
-export const getCurrentCallbacks = (state: RootState) => {
-	return state.fieldsReducer.currentCallbacks
+export const getCurrentOperations = (state: RootState) => {
+	return state.fieldsReducer.currentOperations
 }
