@@ -102,6 +102,8 @@ def base64_decode(s):
 
     return decoded
 
+
+
 def drawing_authors():
     """
      Deseneaza autori,denumirea.
