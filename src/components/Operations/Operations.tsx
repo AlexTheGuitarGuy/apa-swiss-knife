@@ -3,6 +3,7 @@ import { fieldsActions, transformText } from '../../redux/fields-reducer/fields-
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { getOperationsMap } from '../../redux/fields-reducer/fields-selector'
 import { ReactNode } from 'react'
+import NameHeader from '../common/NameHeader/NameHeader'
 
 const Operations = () => {
 	const operationsMap = useAppSelector(getOperationsMap)
@@ -24,7 +25,13 @@ const Operations = () => {
 		)
 	}
 
-	return <div className='w-full flex flex-col'>{operationButtons}</div>
+	return (
+		<div className='w-full flex flex-col'>
+			<NameHeader text={'Operations'} />
+			<input placeholder='Search...' />
+			{operationButtons}
+		</div>
+	)
 }
 
 export default Operations

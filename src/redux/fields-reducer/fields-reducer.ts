@@ -40,6 +40,11 @@ const fieldsReducer = (state = initialState, action: FieldsAction): FieldsReduce
           (operation: string, index: number) => index !== action.index,
         ),
       }
+    case 'SWISS_KNIFE/FIELDS_REDUCER/RESET_OPERATIONS':
+      return {
+        ...state,
+        currentOperations: [],
+      }
     default:
       return state
   }
@@ -66,6 +71,11 @@ export const fieldsActions = {
     ({
       type: 'SWISS_KNIFE/FIELDS_REDUCER/FILTER_FROM_OPERATIONS',
       index,
+    } as const),
+
+  resetOperations: () =>
+    ({
+      type: 'SWISS_KNIFE/FIELDS_REDUCER/RESET_OPERATIONS',
     } as const),
 }
 
