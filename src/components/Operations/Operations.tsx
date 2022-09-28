@@ -15,7 +15,7 @@ const Operations = () => {
 	const operationButtons: ReactNode[] = []
 
 	for (const [key, value] of Object.entries(operationsMap)) {
-		if (!searchTerm || key.includes(searchTerm))
+		if (key.includes(searchTerm))
 			operationButtons.push(
 				<OperationCard
 					key={key}

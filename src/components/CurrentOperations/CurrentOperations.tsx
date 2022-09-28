@@ -15,7 +15,7 @@ const CurrentOperations = () => {
 
 	return (
 		<div className='w-full'>
-			<NameHeader text='Recipe' extraClasses='flex justify-between'>
+			<NameHeader text='Recipe' extraStyles='flex justify-between'>
 				<img
 					className='h-6 w-6 hover:cursor-pointer'
 					src={trashBin}

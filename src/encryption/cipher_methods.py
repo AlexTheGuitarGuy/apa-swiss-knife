@@ -59,7 +59,7 @@ def caesar_decode(text, s):
     return result
 
 
-def caesar_brut_force(message):
+def caesar_brute_force(message):
     LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     str = message.upper()
     for key in range(len(LETTERS)):
