@@ -21,7 +21,7 @@ const InputOutput = () => {
 					dispatch(setText(event.target.value))
 				}}
 				className='h-full p-1 
-				resize-none focus:outline-gray-400 transition'
+				resize-none focus:outline-gray-400'
 			/>
 
 			<NameHeader text={'Output'} />

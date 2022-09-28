@@ -3,7 +3,7 @@ import { getCurrentOperations } from '../../redux/fields-reducer/fields-selector
 import CurrentOperationCard from './CurrentOperationCard/CurrentOperationCard'
 import NameHeader from '../common/NameHeader/NameHeader'
 import trashBin from '../../assets/trash-bin.png'
-import { fieldsActions } from '../../redux/fields-reducer/fields-reducer'
+import { fieldsActions, transformText } from '../../redux/fields-reducer/fields-reducer'
 
 const CurrentOperations = () => {
 	const currentOperations = useAppSelector(getCurrentOperations)
@@ -22,6 +22,7 @@ const CurrentOperations = () => {
 					alt='delete all'
 					onClick={() => {
 						dispatch(fieldsActions.resetOperations())
+						dispatch(transformText())
 					}}
 				/>
 			</NameHeader>
