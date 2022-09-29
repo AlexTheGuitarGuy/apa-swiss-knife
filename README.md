@@ -1,6 +1,6 @@
 # Inspirations
 
-This project was inspired by CyberChef and was made possible with Eel for Python
+This project was inspired by CyberChef and was made possible with Eel for Python.
 You can learn more about CyberChef [here](https://github.com/gchq/CyberChef)
 and you can learn more about Eel [here](https://github.com/ChrisKnott/Eel)
 
