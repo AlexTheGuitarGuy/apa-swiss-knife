@@ -1,8 +1,10 @@
 # Inspirations
 
-This project was inspired by CyberChef and was made possible with Eel for Python
+This project was inspired by CyberChef and was made possible with Eel for Python.\
 You can learn more about CyberChef [here](https://github.com/gchq/CyberChef)
-and you can learn more about Eel [here](https://github.com/ChrisKnott/Eel)
+and you can learn more about Eel [here](https://github.com/ChrisKnott/Eel).\
+[Here](https://github.com/ChrisKnott/Eel/tree/master/examples/07%20-%20CreateReactApp)
+is the official example of a combination of Eel and create-react-app.
 
 # Getting Started with Create React App
 
