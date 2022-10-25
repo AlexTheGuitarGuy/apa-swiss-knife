@@ -1,9 +1,13 @@
 import { InferAction, InferThunk } from '../store'
 
+export type Operation = {
+  type: string
+  key?: string
+}
 const initialState = {
   inputText: '',
   displayText: '',
-  currentOperations: [] as string[],
+  currentOperations: [] as Operation[],
   operationsMap: {
     'To Base 64': 'base64Encrypt',
     'From Base 64': 'base64Decrypt',
@@ -11,6 +15,13 @@ const initialState = {
     'From Morse': 'morseDecrypt',
     Rot13: 'rot13',
     Rot47: 'rot47',
+    // below methods require keys
+    'Vigenere Encode': 'vigenereEncode',
+    'Vigenere Decode': 'vigenereDecode',
+    'Caesar Encode': 'caesarEncode',
+    'Caesar Decode': 'caesarDecode',
+    'Transposition Encode': 'transpositionEncode',
+    'Transposition Decode': 'transpositionDecode',
   },
 }
 
@@ -37,7 +48,7 @@ const fieldsReducer = (state = initialState, action: FieldsAction): FieldsReduce
       return {
         ...state,
         currentOperations: state.currentOperations.filter(
-          (operation: string, index: number) => index !== action.index,
+          (operation, index) => index !== action.index,
         ),
       }
     case 'SWISS_KNIFE/FIELDS_REDUCER/RESET_OPERATIONS':
@@ -61,7 +72,7 @@ export const fieldsActions = {
       type: 'SWISS_KNIFE/FIELDS_REDUCER/SET_DISPLAY_TEXT',
       payload: { displayText },
     } as const),
-  pushToOperations: (operation: string) =>
+  pushToOperations: (operation: Operation) =>
     ({
       type: 'SWISS_KNIFE/FIELDS_REDUCER/PUSH_TO_OPERATIONS',
       operation,
@@ -86,8 +97,9 @@ export const transformText = (): FieldsThunk => {
 
     let transformed = text
 
-    for (const operation of currentOperations) {
-      transformed = await window.eel[operation](transformed)()
+    for (const { type, key } of currentOperations) {
+      if (key) transformed = await window.eel[type](transformed, key)()
+      else transformed = await window.eel[type](transformed)()
     }
     dispatch(fieldsActions.setDisplayText(transformed))
   }

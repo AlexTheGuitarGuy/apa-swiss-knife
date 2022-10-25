@@ -1,9 +1,11 @@
-import OperationCard from './OperationCard/OperationCard'
 import { fieldsActions, transformText } from '../../redux/fields-reducer/fields-reducer'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { getOperationsMap } from '../../redux/fields-reducer/fields-selector'
 import { ReactNode, useState } from 'react'
+import { v1 as uuidv1 } from 'uuid'
+
 import NameHeader from '../common/NameHeader/NameHeader'
+import OperationCard from './OperationCard/OperationCard'
 
 const Operations = () => {
 	const [searchTerm, setSearchTerm] = useState('')
@@ -14,14 +16,14 @@ const Operations = () => {
 
 	const operationButtons: ReactNode[] = []
 
-	for (const [key, value] of Object.entries(operationsMap)) {
-		if (key.includes(searchTerm))
+	for (const [name, camelCase] of Object.entries(operationsMap)) {
+		if (name.includes(searchTerm))
 			operationButtons.push(
 				<OperationCard
-					key={key}
-					text={key}
+					key={uuidv1()}
+					text={name}
 					operation={() => {
-						dispatch(fieldsActions.pushToOperations(value))
+						dispatch(fieldsActions.pushToOperations({ type: camelCase }))
 						dispatch(transformText())
 					}}
 				/>,
@@ -29,7 +31,7 @@ const Operations = () => {
 	}
 
 	return (
-		<div className='w-full flex flex-col'>
+		<div className='w-full flex flex-col overflow-scroll'>
 			<NameHeader text={'Operations'} />
 			<input
 				placeholder='Search...'

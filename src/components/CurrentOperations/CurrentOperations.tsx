@@ -1,16 +1,18 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { getCurrentOperations } from '../../redux/fields-reducer/fields-selector'
+import { fieldsActions, transformText } from '../../redux/fields-reducer/fields-reducer'
+import { v1 as uuidv1 } from 'uuid'
+
 import CurrentOperationCard from './CurrentOperationCard/CurrentOperationCard'
 import NameHeader from '../common/NameHeader/NameHeader'
 import trashBin from '../../assets/trash-bin.png'
-import { fieldsActions, transformText } from '../../redux/fields-reducer/fields-reducer'
 
 const CurrentOperations = () => {
 	const currentOperations = useAppSelector(getCurrentOperations)
 	const dispatch = useAppDispatch()
 
-	const currentOperationNodeList = currentOperations.map((operation: string, index: number) => {
-		return <CurrentOperationCard key={operation + index} operation={operation} index={index} />
+	const currentOperationNodeList = currentOperations.map((operation, index) => {
+		return <CurrentOperationCard key={uuidv1()} operation={operation} index={index} />
 	})
 
 	return (

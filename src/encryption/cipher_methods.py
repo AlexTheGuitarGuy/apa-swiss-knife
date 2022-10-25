@@ -16,7 +16,7 @@ def generateKey(string, key):
     return ("".join(key))
 
 
-def vigenere_cipher(string, key):
+def vigenere_encode(string, key):
     cipher_text = []
     for i in range(len(string)):
         x = (ord(string[i]) +
@@ -76,8 +76,8 @@ def caesar_brute_force(message):
         print('Hacking key #%s: %s' % (key, translated))
 
 
-# Transpozition cipher
-def transpozition_encode(key, message):
+# Transposition cipher
+def transposition_encode(message, key):
     ciphertext = [''] * key
 
     for col in range(key):
@@ -88,7 +88,7 @@ def transpozition_encode(key, message):
     return ''.join(ciphertext)  # Cipher text
 
 
-def transpozition_decode(key, message):  # print(transpozition_encode(6,'Toners raiCntisippoh'))
+def transposition_decode(message, key):  # print(transposition_encode(6,'Toners raiCntisippoh'))
     numOfColumns = math.ceil(len(message) / key)
     numOfRows = key
     numOfShadedBoxes = (numOfColumns * numOfRows) - len(message)
@@ -116,28 +116,28 @@ def revers_encode(message):
 
 
 # Shashing algorithm
-def hash_md4(messoge):
-    text = messoge
+def hash_md4(message):
+    text = message
     hashObject = MD4.new(text.encode('utf-8'))
     digest = hashObject.hexdigest()
     return digest
 
 
-def hash_md5(messoge):
-    text = messoge
+def hash_md5(message):
+    text = message
     hashObject = MD5.new(text.encode('utf-8'))
     digest = hashObject.hexdigest()
     return digest
 
 
-def hash_md2(messoge):
-    text = messoge
+def hash_md2(message):
+    text = message
     hashObject = MD2.new(text.encode('utf-8'))
     digest = hashObject.hexdigest()
     return digest
 
 
-# BrainFuke--only decode
+# BrainFuck--only decode
 def block(code):
     opened = []
     blocks = {}

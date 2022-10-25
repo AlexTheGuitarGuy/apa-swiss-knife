@@ -1,14 +1,21 @@
 import { FC } from 'react'
-import { fieldsActions, transformText } from '../../../redux/fields-reducer/fields-reducer'
 import { getKeyByValue } from '../../../utils/object-helpers'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
+import {
+	fieldsActions,
+	transformText,
+	Operation,
+} from '../../../redux/fields-reducer/fields-reducer'
 import { getOperationsMap } from '../../../redux/fields-reducer/fields-selector'
 
 type CurrentOperationCardProps = {
-	operation: string
+	operation: Operation
 	index: number
 }
-const CurrentOperationCard: FC<CurrentOperationCardProps> = ({ operation, index }) => {
+const CurrentOperationCard: FC<CurrentOperationCardProps> = ({
+	operation: { type, key },
+	index,
+}) => {
 	const operationsMap = useAppSelector(getOperationsMap)
 
 	const dispatch = useAppDispatch()
@@ -21,7 +28,11 @@ const CurrentOperationCard: FC<CurrentOperationCardProps> = ({ operation, index 
 						border-green-400 border-t last:border-b
 						flex justify-between'
 		>
-			{getKeyByValue(operationsMap, operation)}
+			<div className='my-auto'>{getKeyByValue(operationsMap, type)}</div>
+			<input
+				placeholder='Key'
+				className='focus:outline-gray-400 px-4 py-2 border border-gray-300 text-gray-700'
+			/>
 			<button
 				onClick={() => {
 					dispatch(fieldsActions.filterFromOperations(index))
