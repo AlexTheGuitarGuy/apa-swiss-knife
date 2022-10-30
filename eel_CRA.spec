@@ -8,7 +8,7 @@ a = Analysis(
     ['eel_CRA.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:\\Users\\andut\\Desktop\\code\\react_projects\\CyberChef-ripoff\\SwissKnife\\venv\\lib\\site-packages\\eel\\eel.js', 'eel'), ('build', 'build')],
+    datas=[('D:\\code\\react-projects\\CyberChef-ripoff\\APA-SwissKnife\\venv\\lib\\site-packages\\eel\\eel.js', 'eel'), ('build', 'build')],
     hiddenimports=['bottle_websocket'],
     hookspath=[],
     hooksconfig={},

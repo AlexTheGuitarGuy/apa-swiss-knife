@@ -1,7 +1,7 @@
 """Main Python application file for the EEL-CRA demo."""
 import logging
 
-logging.basicConfig(filename='C:/Users/andut/Desktop/code/react_projects/CyberChef-ripoff/SwissKnife/App.log',level=logging.DEBUG)
+logging.basicConfig(filename='../App.log',level=logging.DEBUG)
 
 try:
     import os
@@ -25,7 +25,7 @@ try:
     def base64Decrypt(string):
        return base_64_decrypt(string)
 
-    @eel.expose  
+    @eel.expose
     def rot13(string):
        return rot_13(string)
 
@@ -33,19 +33,17 @@ try:
     def rot47(string):
        return rot_47(string)
 
-    @eel.expose  
+    @eel.expose
     def morseEncrypt(string):
        return morse_encrypt(string)
     @eel.expose
     def morseDecrypt(string):
-       return morse_decrypt(string)    
+       return morse_decrypt(string)
 
 
     # Cipher methods
     @eel.expose
     def vigenereEncode(string, key):
-        print(string)
-        print(key)
         return vigenere_encode(string, key)
     @eel.expose
     def vigenereDecode(string, key):
@@ -53,6 +51,8 @@ try:
 
     @eel.expose
     def caesarEncode(string, key):
+        print(string)
+        print(key)
         return caesar_encode(string, key)
     @eel.expose
     def caesarDecode(string, key):

@@ -397,3 +397,31 @@ DEBUG:geventwebsocket.handler:Initializing WebSocket
 DEBUG:geventwebsocket.handler:Validating WebSocket request
 DEBUG:geventwebsocket.handler:Attempting to upgrade connection
 DEBUG:geventwebsocket.handler:WebSocket request accepted, switching protocols
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+INFO:geventwebsocket.handler:127.0.0.1 - - [2022-10-30 20:10:36] "GET /index.html HTTP/1.1" 200 931 0.000999
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+INFO:geventwebsocket.handler:127.0.0.1 - - [2022-10-30 20:10:36] "GET /static/js/main.ebc662a1.js HTTP/1.1" 200 174020 0.000999
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+INFO:geventwebsocket.handler:127.0.0.1 - - [2022-10-30 20:10:36] "GET /static/css/main.3882a1aa.css HTTP/1.1" 200 8195 0.001000
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+INFO:geventwebsocket.handler:127.0.0.1 - - [2022-10-30 20:10:36] "GET /eel.js HTTP/1.1" 200 6211 0.001000
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+INFO:geventwebsocket.handler:127.0.0.1 - - [2022-10-30 20:10:36] "GET /static/media/trash-bin.a6fd29509719f079bfd7.png HTTP/1.1" 200 12767 0.000998
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+DEBUG:geventwebsocket.handler:Attempting to upgrade connection
+DEBUG:geventwebsocket.handler:WebSocket request accepted, switching protocols
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+INFO:geventwebsocket.handler:127.0.0.1 - - [2022-10-30 20:10:36] "GET /manifest.json HTTP/1.1" 200 719 0.000000
+DEBUG:geventwebsocket.handler:Initializing WebSocket
+DEBUG:geventwebsocket.handler:Validating WebSocket request
+INFO:geventwebsocket.handler:127.0.0.1 - - [2022-10-30 20:10:36] "GET /logo192.png HTTP/1.1" 200 5543 0.001015
+DEBUG:geventwebsocket.handler:Closed WebSocket
+DEBUG:geventwebsocket.handler:Failed to write closing frame -> closing socket
+DEBUG:geventwebsocket.handler:Closed WebSocket
