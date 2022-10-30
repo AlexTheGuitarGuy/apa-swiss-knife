@@ -1,22 +1,19 @@
 import { FC } from 'react'
 import { getKeyByValue } from '../../../utils/object-helpers'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
+import { fieldsActions, transformText } from '../../../redux/fields-reducer/fields-reducer'
 import {
-  fieldsActions,
-  transformText,
-  Operation,
-} from '../../../redux/fields-reducer/fields-reducer'
-import { getOperationsMap } from '../../../redux/fields-reducer/fields-selector'
+  getCurrentOperations,
+  getOperationsMap,
+} from '../../../redux/fields-reducer/fields-selector'
 
 type CurrentOperationCardProps = {
-  operation: Operation
   index: number
 }
-const CurrentOperationCard: FC<CurrentOperationCardProps> = ({
-  operation: { type, key, keyed },
-  index,
-}) => {
+const CurrentOperationCard: FC<CurrentOperationCardProps> = ({ index }) => {
   const operationsMap = useAppSelector(getOperationsMap)
+  const currentOperations = useAppSelector(getCurrentOperations)
+  const { type, keyed, key } = currentOperations[index]
 
   const dispatch = useAppDispatch()
 
@@ -35,7 +32,7 @@ const CurrentOperationCard: FC<CurrentOperationCardProps> = ({
         <input
           placeholder='Key'
           className='focus:outline-gray-400 px-4 py-2 border border-gray-300 text-gray-700'
-          value={key}
+          value={key || ''}
           onChange={(event) => {
             dispatch(fieldsActions.updateKey(index, event.target.value))
             dispatch(transformText())
