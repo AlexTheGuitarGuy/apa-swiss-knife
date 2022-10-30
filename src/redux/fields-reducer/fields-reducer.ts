@@ -125,7 +125,6 @@ export const transformText = (): FieldsThunk => {
     let transformed = getState().fieldsReducer.inputText
 
     for (const { type, key, keyed } of currentOperations) {
-      console.log(type, key)
       if (keyed) {
         if (!key) return
         transformed = await window.eel[type](transformed, key)()
